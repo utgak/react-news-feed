@@ -63,3 +63,4 @@ gem "react-rails", "= 3.2"
 
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick', '~> 4.9'
+gem 'redis'

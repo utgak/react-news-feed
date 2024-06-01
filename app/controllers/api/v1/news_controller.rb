@@ -12,6 +12,7 @@ class Api::V1::NewsController < ApplicationController
   def create
     @news = News.new(news_params)
     if @news.save
+      ActionCable.server.broadcast 'news_channel', @news
       render json: @news, status: :created
     else
       render json: @news.errors, status: :unprocessable_entity
@@ -21,22 +22,20 @@ class Api::V1::NewsController < ApplicationController
   def update
     @news = News.find(params[:id])
     if @news.update(news_params)
+      ActionCable.server.broadcast 'news_channel', @news
       render json: @news
     else
       render json: @news.errors, status: :unprocessable_entity
     end
   end
 
-  def destroy
-    @news = News.find(params[:id])
-    @news.destroy
-    head :no_content
-  end
-
   def hide
-    @news = News.find(params[:id])
-    @news.update(hidden: true)
-    head :no_content
+    if @news.update(visible: false)
+      ActionCable.server.broadcast 'news_channel', @news
+      render json: @news
+    else
+      render json: @news.errors, status: :unprocessable_entity
+    end
   end
 
   private

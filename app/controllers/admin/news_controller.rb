@@ -16,6 +16,7 @@ class Admin::NewsController < ApplicationController
   def create
     @admin_news = ::News.new(news_params)
     if @admin_news.save
+      ActionCable.server.broadcast 'news_channel', @admin_news
       redirect_to admin_news_index_path, notice: 'News was successfully created.'
     else
       render :new
@@ -24,6 +25,7 @@ class Admin::NewsController < ApplicationController
 
   def update
     if @admin_news.update(news_params)
+      ActionCable.server.broadcast 'news_channel', @admin_news
       redirect_to admin_news_index_path, notice: 'News was successfully updated.'
     else
       render :edit
