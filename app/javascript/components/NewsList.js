@@ -14,11 +14,17 @@ const NewsList = () => {
     const handleNewsReceived = (event) => {
       const newNewsItem = event.detail;
       setNews((prevNews) => {
+        console.log(prevNews)
         const newsIndex = prevNews.findIndex(item => item.id === newNewsItem.id);
         if (newsIndex !== -1) {
           const updatedNews = [...prevNews];
-          updatedNews[newsIndex] = newNewsItem;
-          return updatedNews;
+          if (newNewsItem.hidden == true) {
+            updatedNews.splice(newsIndex, 1);
+            return updatedNews;
+          } else {
+            updatedNews[newsIndex] = newNewsItem;
+            return updatedNews;
+          }
         } else {
           return [newNewsItem, ...prevNews];
         }

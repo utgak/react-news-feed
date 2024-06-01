@@ -1,10 +1,13 @@
-<h1>Editing News</h1>
 
-<%= render "form", admin_news: @admin_news %>
 
-<br>
+<div class="container">
+  <h1>Editing News</h1>
 
-<div class="mt-3">
-  <%= button_to "Destroy this news", admin_news_path(@admin_news), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-  <%= link_to "Back to news", admin_news_index_path, class: 'btn btn-secondary' %>
+  <%= render "form", admin_news: @admin_news %>
+
+  <br>
+
+  <div class="mt-3">
+    <%= button_to "Back to news", admin_news_index_path, class: 'btn btn-secondary' %>
+  </div>
 </div>

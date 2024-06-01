@@ -4,8 +4,7 @@
   <div class="card-body">
     <%= render @admin_news %>
     <div class="mt-3 d-flex">
-      <%= link_to "Back to news", admin_news_index_path, class: 'btn btn-secondary me-1' %>
-      <%= button_to "Destroy this news", admin_news_path(@admin_news), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger me-1' %>
+      <%= button_to "Back to news", admin_news_index_path, class: 'btn btn-secondary me-1' %>
     </div>
   </div>
 </div>
