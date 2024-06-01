@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import NewsChannel from '../channels/news_channel';
 
 const NewsDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [newsItem, setNewsItem] = useState(null);
 
   useEffect(() => {
@@ -16,7 +17,11 @@ const NewsDetail = () => {
       const updatedNewsItem = event.detail;
 
       if (updatedNewsItem.id === parseInt(id, 10)) {
-        setNewsItem(updatedNewsItem);
+        if (!updatedNewsItem.visible) {
+          navigate('/news');
+        } else {
+          setNewsItem(updatedNewsItem);
+        }
       }
     };
 
@@ -25,7 +30,7 @@ const NewsDetail = () => {
     return () => {
       window.removeEventListener('news-received', handleNewsReceived);
     };
-  }, [id]);
+  }, [id, navigate]);
 
   if (!newsItem) return <div>Loading...</div>;
 
