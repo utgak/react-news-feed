@@ -43,7 +43,7 @@ const NewsList = () => {
             <li key={newsItem.id}>
               <Link to={`/news/${newsItem.id}`}>
                 <h2>{newsItem.title}</h2>
-                <img src={newsItem.image_url} alt={newsItem.title} />
+                <img src={newsItem.image.url} alt={newsItem.title} />
               </Link>
             </li>
           )

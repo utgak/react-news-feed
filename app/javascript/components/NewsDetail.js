@@ -37,7 +37,7 @@ const NewsDetail = () => {
   return (
     <div>
       <h1>{newsItem.title}</h1>
-      <img src={newsItem.image_url} alt={newsItem.title} />
+      <img src={newsItem.image.url} alt={newsItem.title} />
       <p>{newsItem.content}</p>
     </div>
   );

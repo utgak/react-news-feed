@@ -1,4 +1,4 @@
-class Admin::NewsController < ApplicationController
+class Admin::NewsController < Admin::ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -34,6 +34,7 @@ class Admin::NewsController < ApplicationController
 
   def destroy
     @admin_news.destroy
+    ActionCable.server.broadcast 'news_channel', @admin_news
     redirect_to admin_news_index_path, notice: 'News was successfully destroyed.'
   end
 
