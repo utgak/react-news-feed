@@ -7,4 +7,18 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  namespace :api do
+    namespace :v1 do
+      resources :news, only: [:index, :show, :create, :update, :destroy]
+      put 'news/:id/hide', to: 'news#hide'
+    end
+  end
+
+  namespace :admin do
+    resources :news
+  end
+
+  get '/', to: 'home#index'
+  get 'news', to: 'news#index'
 end
