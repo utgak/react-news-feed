@@ -35,9 +35,9 @@ const NewsDetail = () => {
   if (!newsItem) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="container mt-5">
       <h1>{newsItem.title}</h1>
-      <img src={newsItem.image.url} alt={newsItem.title} />
+      <img src={newsItem.image.url} alt={newsItem.title} className="img-fluid" />
       <p>{newsItem.content}</p>
     </div>
   );

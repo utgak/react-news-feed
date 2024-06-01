@@ -1,26 +1,13 @@
-<div id="<%= dom_id news %>">
-  <p>
-    <strong>Title:</strong>
-    <%= news.title %>
-  </p>
-
-  <p>
-    <strong>Published at:</strong>
-    <%= news.published_at %>
-  </p>
-
-  <p>
-    <strong>Hidden:</strong>
-    <%= news.hidden %>
-  </p>
-
-  <p>
-    <strong>Image:</strong>
-    <%= image_tag news.image.url %>
-  </p>
-
-  <p>
-    <strong>Content:</strong>
-    <%= news.content %>
-  </p>
+<div class="card mb-3" id="<%= dom_id news %>">
+  <div class="card-body">
+    <h5 class="card-title"><strong>Title:</strong> <%= news.title %></h5>
+    <p class="card-text"><strong>Published at:</strong> <%= news.published_at %></p>
+    <p class="card-text"><strong>Hidden:</strong> <%= news.hidden %></p>
+    <p class="card-text"><strong>Content:</strong> <%= news.content %></p>
+    <p><strong>Image:</strong> <%= image_tag news.image.url, class: 'img-fluid ', size: '400x400' %></p>
+    <div class="d-flex">
+      <%= link_to "Show", admin_news_path(news), class: 'btn btn-info me-1' %>
+      <%= link_to "Edit", edit_admin_news_path(news), class: 'btn btn-warning me-1' %>
+    </div>
+  </div>
 </div>

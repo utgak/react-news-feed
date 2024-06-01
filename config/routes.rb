@@ -19,6 +19,6 @@ Rails.application.routes.draw do
     resources :news
   end
 
-  get '/', to: 'home#index'
+  root to: 'home#index'
   get 'news', to: 'news#index'
 end

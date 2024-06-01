@@ -1,8 +1,7 @@
-<%= form_with(model: [:admin, admin_news]) do |form| %>
+<%= form_with(model: [:admin, admin_news], local: true, class: 'form-group') do |form| %>
   <% if admin_news.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(admin_news.errors.count, "error") %> prohibited this admin_news from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h4><%= pluralize(admin_news.errors.count, "error") %> prohibited this news from being saved:</h4>
       <ul>
         <% admin_news.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,32 +10,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+  <div class="form-group">
+    <%= form.label :content %>
+    <%= form.text_area :content, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :published_at, style: "display: block" %>
-    <%= form.datetime_field :published_at %>
+  <div class="form-group">
+    <%= form.label :published_at %>
+    <%= form.datetime_field :published_at, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :hidden, style: "display: block" %>
-    <%= form.check_box :hidden %>
+  <div class="form-group form-check">
+    <%= form.check_box :hidden, class: 'form-check-input' %>
+    <%= form.label :hidden, class: 'form-check-label' %>
   </div>
 
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image, accept: 'image/png,image/jpeg' %>
+  <div class="form-group">
+    <%= form.label :image %>
+    <%= form.file_field :image, class: 'form-control-file', accept: 'image/png,image/jpeg' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

@@ -33,6 +33,7 @@ class Admin::NewsController < Admin::ApplicationController
   end
 
   def destroy
+
     @admin_news.destroy
     ActionCable.server.broadcast 'news_channel', @admin_news
     redirect_to admin_news_index_path, notice: 'News was successfully destroyed.'

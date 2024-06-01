@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import NewsChannel from '../channels/news_channel';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
+  const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
     axios.get('/api/v1/news')
@@ -13,10 +13,8 @@ const NewsList = () => {
 
     const handleNewsReceived = (event) => {
       const newNewsItem = event.detail;
-
       setNews((prevNews) => {
         const newsIndex = prevNews.findIndex(item => item.id === newNewsItem.id);
-
         if (newsIndex !== -1) {
           const updatedNews = [...prevNews];
           updatedNews[newsIndex] = newNewsItem;
@@ -34,16 +32,33 @@ const NewsList = () => {
     };
   }, []);
 
+  const sortNews = () => {
+    const sortedNews = [...news].sort((a, b) => {
+      const dateA = new Date(a.published_at);
+      const dateB = new Date(b.published_at);
+      if (sortOrder === 'desc') {
+        return dateB - dateA;
+      } else {
+        return dateA - dateB;
+      }
+    });
+    setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
+    setNews(sortedNews);
+  };
+
   return (
-    <div>
-      <h1>Список новостей</h1>
-      <ul>
+    <div className="container mt-5">
+      <h1 className="mb-4">Список новостей</h1>
+      <button onClick={sortNews} className="btn btn-primary mb-3">
+        Сортировать по дате {sortOrder === 'desc' ? 'по убыванию' : 'по возрастанию'}
+      </button>
+      <ul className="list-group">
         {news.map(newsItem => (
           newsItem && (
-            <li key={newsItem.id}>
+            <li key={newsItem.id} className="list-group-item">
               <Link to={`/news/${newsItem.id}`}>
-                <h2>{newsItem.title}</h2>
-                <img src={newsItem.image.url} alt={newsItem.title} />
+                <h5>{newsItem.title}</h5>
+                <img src={newsItem.image.url} alt={newsItem.title} className="img-fluid" />
               </Link>
             </li>
           )

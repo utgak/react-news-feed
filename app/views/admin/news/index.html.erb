@@ -1,14 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success"><%= notice %></p>
 
-<h1>News</h1>
+<h1 class="ms-3">News</h1>
 
-<div id="admin_news">
+<div class="ms-3">
+  <%= link_to "New News", new_admin_news_path, class: 'btn btn-primary' %>
+</div>
+
+<div id="admin_news" class="mt-3">
   <% @admin_news.each do |admin_news| %>
     <%= render admin_news %>
-    <p>
-      <%= link_to "Show this news", admin_news_path(admin_news) %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New news", new_admin_news_path %>
