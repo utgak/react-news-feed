@@ -2,19 +2,19 @@ class Admin::NewsController < Admin::ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
 
   def index
-    @admin_news = ::News.all
+    @admin_news = News.all
   end
 
   def show; end
 
   def new
-    @admin_news = ::News.new
+    @admin_news = News.new
   end
 
   def edit; end
 
   def create
-    @admin_news = ::News.new(news_params)
+    @admin_news = ews.new(news_params)
     if @admin_news.save
       ActionCable.server.broadcast 'news_channel', @admin_news
       redirect_to admin_news_index_path, notice: 'News was successfully created.'
@@ -33,7 +33,6 @@ class Admin::NewsController < Admin::ApplicationController
   end
 
   def destroy
-
     @admin_news.destroy
     ActionCable.server.broadcast 'news_channel', @admin_news
     redirect_to admin_news_index_path, notice: 'News was successfully destroyed.'
@@ -42,7 +41,7 @@ class Admin::NewsController < Admin::ApplicationController
   private
 
   def set_news
-    @admin_news = ::News.find(params[:id])
+    @admin_news = News.find(params[:id])
   end
 
   def news_params

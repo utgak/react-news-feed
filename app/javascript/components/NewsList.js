@@ -56,7 +56,7 @@ const NewsList = () => {
     <div className="container mt-5">
       <h1 className="mb-4">Список новостей</h1>
       <button onClick={sortNews} className="btn btn-primary mb-3">
-        Сортировать по дате {sortOrder === 'desc' ? 'по убыванию' : 'по возрастанию'}
+        Сортировать {sortOrder === 'desc' ? 'по убыванию' : 'по возрастанию'} даты публикации
       </button>
       <ul className="list-group">
         {news.map(newsItem => (

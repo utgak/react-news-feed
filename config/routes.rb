@@ -10,8 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :news, only: [:index, :show, :create, :update, :destroy]
-      put 'news/:id/hide', to: 'news#hide'
+      resources :news, only: [:index, :show]
     end
   end
 
