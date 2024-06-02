@@ -14,7 +14,7 @@ class Admin::NewsController < Admin::ApplicationController
   def edit; end
 
   def create
-    @admin_news = ews.new(news_params)
+    @admin_news = News.new(news_params)
     if @admin_news.save
       ActionCable.server.broadcast 'news_channel', @admin_news
       redirect_to admin_news_index_path, notice: 'News was successfully created.'
