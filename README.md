@@ -1,5 +1,5 @@
 rails s
 
-# react:
+react:
 
 bin/shakapacker-dev-server
