@@ -4,9 +4,11 @@ import Home from './Home';
 import NewsList from './NewsList';
 import NewsDetail from './NewsDetail';
 import NotFound from './NotFound';
+import Header from './Header';
 
 const App = () => (
   <Router>
+    <Header />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/news" element={<NewsList />} />
